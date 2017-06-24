@@ -1,0 +1,3 @@
+PurchaseMailer#send_when_purchase
+
+Hi, find me in app/views/purchase_mailer/send_when_purchase

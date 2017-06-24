@@ -1,0 +1,25 @@
+.clearfix
+	.go-to-user
+		p = render 'shared/header'
+
+.collection-title
+	h1 Collection
+= render_breadcrumbs
+.clearfix
+	.paginate.clearfix
+		= paginate @products
+.flex-container
+	- @products.each do |product|
+		.flex-box
+			.collection-box
+				- if product.images.blank?
+					= image_tag "http://design-ec.com/d/e_others_50/l_e_others_501.png", size: '200x200'
+				- else
+					- product.images.each do |image|
+						= image_tag attachment_url(image, :image, :fill, 200, 200)
+				.collection-text-title	
+					p = link_to product.title, product_path(product.id)
+				.collection-text-price
+					p = number_to_currency(product.price, precision: 0, unit: "￥")
+				.collection-text-description
+					p = product.description

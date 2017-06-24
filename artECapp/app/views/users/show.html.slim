@@ -1,0 +1,46 @@
+.clearfix
+	.go-to-user
+		= render 'shared/header'
+		p = link_to 'Home', root_path
+h1 My Account
+
+h3 ORDER
+- @user.orders.order("created_at desc").each do |order|
+	- @user.orders.each do |order|
+	.user-order-box
+		.order-box-header
+			span OrderDate
+			p = order.created_at
+			.order-border
+			.user-order-product
+				p
+					| title : 
+					= order.product.title
+				p = number_to_currency(order.product.price, unit: "￥", precision: 0)
+				p = order.product.description
+				- if order.product.images.blank?
+					= image_tag "http://design-ec.com/d/e_others_50/l_e_others_501.png", size: '150x150'
+				- else
+					- order.product.images.each do |image|
+						= image_tag attachment_url(image, :image, :fill, 150, 150)
+
+			.user-order-info
+				h3 Shipping Direction
+				br
+				p 
+					| NAME : 
+					= order.first_name
+					| &ensp;
+					= order.last_name
+				p
+					| PHONE : 
+					= order.phone
+				p
+					| EMAIL : 
+					= order.email
+				p
+					| ADDRESS1 : 
+					= order.address1
+				p
+					| ADDRESS2 : 
+					= order.address1

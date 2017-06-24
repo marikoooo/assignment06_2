@@ -1,0 +1,67 @@
+.go-to-user
+	- if admin_signed_in?
+		= link_to "LOG OUT", destroy_admin_session_path, method: :delete
+h1 AdminPage
+= link_to 'Home', root_path
+
+.product-table
+	.table-title
+		h3 Product
+		p = link_to 'add new', new_product_path
+	table border=1
+		tbody
+			tr
+				th TITLE
+				th PRICE
+				th DESCRIPTION
+				th IMAGE
+				th CATEGORY
+				th CREATED	
+			- @admin.products.each do |product|
+				tr
+					td = product.title
+					td = product.price
+					td = product.description
+					td 	
+						- if product.images.blank?
+							= image_tag "http://design-ec.com/d/e_others_50/l_e_others_501.png", size: '50x50'
+						- else
+							- product.images.each do |image|
+								= image_tag attachment_url(image, :image, :fill, 50, 50)
+					td = product.created_at.strftime("%h/%m/%d\t%H:%M")
+					td = product.category.name
+						
+.order-table
+	.table-title
+		h3 Orders
+	table border=1
+		tbody
+			tr
+				th TITLE
+				th PRICE
+				th DESCRIPTION
+				th CUSTOMER
+				th DATE
+			- @order.each do |order|
+				tr
+					td = order.product.title
+					td = order.product.price
+					td = order.product.description
+					td
+					 = link_to order.user.email, user_path(order.user.id)
+					td = order.created_at
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

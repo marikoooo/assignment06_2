@@ -1,0 +1,17 @@
+h1 Add New Product
+= form_for @product do |f|
+	.product-data
+		p TITLE　:　
+		p = f.text_field :title, size: "40"
+	.product-data	
+		p PRICE　:　
+		p = f.text_field :price, size: "40"
+	.product-data
+		p DESCRIPTION　:　
+		p = f.text_area :description, size: "39"
+		p CATEGORY : 
+		p = f.collection_select :category_id, Category.all, :id, :name
+	p IMAGE　:　
+	= f.attachment_field :images_images, multiple: true, direct: true
+	= f.hidden_field :admin_id, value: current_admin.id
+	p = f.submit

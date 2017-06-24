@@ -1,0 +1,17 @@
+h3 Enter your shipping address
+= form_for @order do |f|	
+	p = f.label :firstname
+	p = f.text_field :first_name, size: "40"
+	p = f.label :lastname
+	p = f.text_field :last_name, size: "40"
+	p = f.label :phone 	
+	p = f.text_field :phone, size: "40"
+	p = f.label :email 	
+	p = f.text_field :email, size: "40", value: current_user.email
+	p = f.label :address1 
+	p = f.text_field :address1, size: "40"
+	p = f.label :address2 
+	p = f.text_field :address2, size: "40"
+	p = f.text_field :user_id, value: current_user.id
+	p = f.text_field :product_id, value: @product.id
+	= f.submit 'Check out'

@@ -1,0 +1,28 @@
+.clearfix
+	.go-to-user
+		p = render 'shared/header'
+.detail-box
+	h1 = @product.title
+.detail-title-border
+= render_breadcrumbs
+.detail-wrap
+	.clearfix
+		.detail-img.clearfix
+			- if @product.images.blank?
+				= image_tag "http://design-ec.com/d/e_others_50/l_e_others_501.png", size: '300x300'
+			- else
+				- @product.images.each do |image|
+					=image_tag attachment_url(image, :image, :fill, 300, 300)
+		.detail-content
+			.price
+				p = number_to_currency(@product.price, unit: "￥", precision: 0) 
+			.detail-border
+			p DESCRIPTION
+			.description
+				p = @product.description
+			.detail-border
+			.buy-now-btn
+				- if user_signed_in?
+					= link_to 'Buy now', new_order_path(@product.id)
+				- else
+					= link_to 'Buy now', new_user_registration_path

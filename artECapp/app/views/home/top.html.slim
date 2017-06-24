@@ -1,0 +1,14 @@
+.go-to-user
+	p = render 'shared/header'
+	p
+		- if admin_signed_in?
+			= link_to "admin's page", admin_path(current_admin)
+
+.top-title
+	h1 ARTZINE
+	p Art washes away from the soul the dust of everyday life
+	p How about incorporating the arts for your life
+.top-img-box
+	= image_tag("art184.jpg", size: '900x500')
+.go-to-collection
+	= link_to "What's new | ▶︎ more", products_path
